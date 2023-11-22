@@ -5,7 +5,7 @@ const close = document.querySelector('.close');
 
 function show(){
     hover.classList.add('active');
-    modal.classList.add('show');
+    modal.classList.add('show'); 
 }
 
 function hide(){
@@ -18,7 +18,7 @@ close.addEventListener('click', hide);
 
 
         function test(e) {
-            const username = document.getElementById("searchInput").value;
+            const username = document.getElementById("user-name-search").value;
             const url = `https://api.github.com/users/${username}`
         
             fetch(url)
@@ -35,22 +35,18 @@ close.addEventListener('click', hide);
                     const seguindoUser = document.getElementById('seguindo')
                     const postUser = document.getElementById('post-usuario')
                     const bioUser = document.getElementById('bio-usuario')
-                    const avatarUser = document.getElementById('img-perfil')
-                    const searchButton = document.getElementById('searchButton')
-                
-                   
-                     //ainda não consegui mostrar a foto de perfil, em breve atualizarei.
-                    //document.getElementById("img-perfil").style.backgroundImage=`url(${dados.avatar_url})`;
+                    const avatarUser = document.getElementById('img-user')
+                    
 
                     //atribuindo os valores da api ao HTML
-                    avatarUser.src = dados.avatar_url;
+                    avatarUser.style.backgroundImage = `url(${dados.avatar_url})`
                     nomeUser.textContent = dados.name || 'Nome não encontrado'
                     loginUser.textContent =`@${dados.login}`
                     seguidoresUser.textContent = dados.followers 
                     seguindoUser.textContent = dados.following
                     postUser.textContent = dados.public_repos
                     bioUser.textContent = dados.bio || 'o usuario n possui uma bio.'
-                    searchButton.href = dados.html_url
+                   
                 
                 }) 
                 .catch(error => {
@@ -58,8 +54,8 @@ close.addEventListener('click', hide);
                     alert('Usuário não encontrado!')
                 })
     }
-    document.getElementById("searchButton").addEventListener("click", test);
+    document.getElementById("search-button").addEventListener("click", test);
 
-    document.getElementById("searchInput").addEventListener("keyup",function(e){
+    document.getElementById("user-name-search").addEventListener("keyup",function(e){
         if (e.keyCode===13) test(e)
     })
